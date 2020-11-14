@@ -9,11 +9,17 @@ const methodOverride = require('method-override');
 const articleRouter = require('./routes/articles');
 const app = express();
 
-
-mongoose.connect('mongodb://localhost/blog', { 
+const dbUrl = process.env.DATABASE_URL || 'mongodb://localhost/blog';
+mongoose.connect(dbUrl, { 
     useNewUrlParser: true, useUnifiedTopology: true
 });
+
 mongoose.set('useCreateIndex', true);
+
+const db = mongoose.connection;
+db.on('error', error => console.error(error));
+db.once('open', () => console.log('Connected to DB'));
+
 /*
 const dbUrl = process.env.DATABASE_URL;
 mongoose.connect(dbUrl, { 

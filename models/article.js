@@ -41,4 +41,4 @@ articleSchema.pre('validate', function(next){
      }
      next();
 });
-module.exports = mongoose.model('Article',articleSchema);
+module.exports = mongoose.model('Article', articleSchema);

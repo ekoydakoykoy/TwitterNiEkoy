@@ -9,21 +9,17 @@ const methodOverride = require('method-override');
 const articleRouter = require('./routes/articles');
 const app = express();
 
-const dbcon = process.env.EKOY_TWIT || 'mongodb://localhost/blog';
+const dbcon = process.env.EKOY_TWIT;
 
 mongoose.connect(dbcon, { 
     useNewUrlParser: true, useUnifiedTopology: true
 });
 mongoose.set('useCreateIndex', true);
-/*
-const dbUrl = process.env.DATABASE_URL;
-mongoose.connect(dbUrl, { 
-    useNewUrlParser: true, useUnifiedTopology: true 
- });
+
 const db = mongoose.connection;
 db.on('error', error => console.error(error));
 db.once('open', () => console.log('Connected to DB'));
-*/
+
 const port = process.env.PORT || 5000;
 
 app.set('view engine', 'ejs');

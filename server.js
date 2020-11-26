@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const Article = require('./models/article');
 const methodOverride = require('method-override');
 const articleRouter = require('./routes/articles');
+const expressLayouts = require('express-ejs-layouts');
 const app = express();
 
 const dbcon = process.env.EKOY_TWIT;
@@ -25,6 +26,9 @@ const port = process.env.PORT || 5000;
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride('_method'));
+app.use(express.static('public'));
+// app.set('layout','layouts/layout');
+// app.use(expressLayouts);
 
 app.get('/', async (req,res) => {
     const articles = await Article.find().sort({
